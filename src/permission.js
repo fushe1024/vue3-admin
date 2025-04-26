@@ -8,7 +8,7 @@ const whiteList = ['/login']
 /**
  * 路由前置守卫
  */
-router.beforeEach((to, from) => {
+router.beforeEach(async (to, from) => {
   // 获取 token
   const token = store.getters.token
 
@@ -17,6 +17,9 @@ router.beforeEach((to, from) => {
       ElMessage.success('您已经登录')
       return '/'
     } else {
+      if (!store.getters.hsaUserInfo) {
+        await store.dispatch('user/getInfo')
+      }
       return true
     }
   } else if (whiteList.includes(to.path)) {

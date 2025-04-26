@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import storage from './storage'
-import { TOKEN } from '@/constant'
+import store from '@/store'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL, // 设置基础 URL
@@ -13,7 +12,7 @@ service.interceptors.request.use(
   (config) => {
     config.headers.icode = 'helloqianduanxunlianying' // 设置请求头中的 icode
     // 在请求头中添加 token
-    const token = storage.get(TOKEN)
+    const token = store.getters.token
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
