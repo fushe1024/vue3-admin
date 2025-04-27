@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { isCheckTimeout } from './auth.js'
 import store from '@/store'
+import router from '@/router'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL, // 设置基础 URL
@@ -14,6 +16,12 @@ service.interceptors.request.use(
     // 在请求头中添加 token
     const token = store.getters.token
     if (token) {
+      // 判断 token 是否过期
+      if (isCheckTimeout()) {
+        store.dispatch('user/logout')
+        router.push('/login')
+        return Promise.reject(new Error('token 超时了'))
+      }
       config.headers.Authorization = `Bearer ${token}`
     }
     return config
@@ -40,6 +48,15 @@ service.interceptors.response.use(
     return data
   },
   (error) => {
+    // Token 失效，跳转到登录页
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      store.dispatch('user/logout') // 调用登出方法
+      router.replace('/login') // 跳转到登录页
+    }
     // 处理响应错误
     console.error('Response error:', error)
     return Promise.reject(error)

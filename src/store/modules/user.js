@@ -1,5 +1,6 @@
 // user module
 import { login, getUserInfo } from '@/api/sys'
+import { setTimeStamp } from '@/utils/auth'
 import md5 from 'md5'
 import storage from '@/utils/storage'
 import { TOKEN } from '@/constant'
@@ -41,6 +42,7 @@ export default {
         })
           .then((response) => {
             commit('SET_TOKEN', response.token)
+            setTimeStamp()
             router.replace('/')
             resolve()
           })
@@ -62,6 +64,7 @@ export default {
     logout({ commit }) {
       commit('CLEAR_TOKEN')
       commit('CLEAR_USER_INFO')
+      storage.clear()
       router.replace('/login')
     }
   }
