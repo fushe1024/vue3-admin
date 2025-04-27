@@ -1,4 +1,5 @@
 <script setup>
+import Hamburger from '@/components/Hamburger/index.vue'
 import { useStore } from 'vuex'
 const store = useStore()
 /**
@@ -11,6 +12,8 @@ const logout = () => {
 
 <template>
   <div class="nav-bar">
+    <!-- hamburger -->
+    <hamburger />
     <div class="right-menu">
       <!-- 头像 -->
       <el-dropdown class="avater-container" trigger="click">
@@ -50,13 +53,17 @@ const logout = () => {
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   .right-menu {
+    padding-right: 16px;
     height: inherit;
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: end;
-    padding-right: 16px;
 
     :deep(.avater-container) {
       cursor: pointer;

@@ -48,17 +48,18 @@ service.interceptors.response.use(
     return data
   },
   (error) => {
-    // Token 失效，跳转到登录页
+    // 单一用户登录逻辑
     if (
       error.response &&
       error.response.data &&
       error.response.data.code === 401
     ) {
-      store.dispatch('user/logout') // 调用登出方法
-      router.replace('/login') // 跳转到登录页
+      store.dispatch('user/logout')
+      router.replace('/login')
+      ElMessage.error(error.message || '您的账号在其他地方登录')
     }
     // 处理响应错误
-    console.error('Response error:', error)
+    ElMessage.error(error.message)
     return Promise.reject(error)
   }
 )
