@@ -17,15 +17,8 @@ export default {
       state.token = token
       storage.set(TOKEN, token)
     },
-    CLEAR_TOKEN(state) {
-      state.token = ''
-      storage.remove(TOKEN)
-    },
     SET_USER_INFO(state, userInfo) {
       state.userInfo = userInfo
-    },
-    CLEAR_USER_INFO(state) {
-      state.userInfo = {}
     }
   },
   actions: {
@@ -62,8 +55,8 @@ export default {
      * 退出登录
      */
     logout({ commit }) {
-      commit('CLEAR_TOKEN')
-      commit('CLEAR_USER_INFO')
+      commit('SET_TOKEN', '')
+      commit('SET_USER_INFO', {})
       storage.clear()
       router.replace('/login')
     }

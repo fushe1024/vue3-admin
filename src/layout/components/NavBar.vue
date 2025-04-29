@@ -1,6 +1,7 @@
 <script setup>
 import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
+import LangSelect from '@/components/LangSelect/index.vue'
 import { useStore } from 'vuex'
 const store = useStore()
 /**
@@ -18,6 +19,8 @@ const logout = () => {
     <!-- Breadcrumb -->
     <breadcrumb />
     <div class="right-menu">
+      <!-- 切换语言 -->
+      <lang-select class="right-menu-item" />
       <!-- 头像 -->
       <el-dropdown class="avater-container" trigger="click">
         <div class="avater-wrapper">
@@ -29,19 +32,18 @@ const logout = () => {
         </div>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
-            <el-dropdown-item disabled>个人中心</el-dropdown-item>
             <router-link to="/">
-              <el-dropdown-item>首页</el-dropdown-item>
+              <el-dropdown-item>{{ $t('navBar.home') }}</el-dropdown-item>
             </router-link>
             <a
               href="https://github.com/fushe1024/vue3-imooc-admin"
               target="_blank"
             >
-              <el-dropdown-item>仓库地址</el-dropdown-item>
+              <el-dropdown-item>{{ $t('navBar.address') }}</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="logout"
-              >退出登录</el-dropdown-item
-            >
+            <el-dropdown-item divided @click="logout">{{
+              $t('navBar.logout')
+            }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -66,6 +68,17 @@ const logout = () => {
     flex: 1;
     align-items: center;
     justify-content: end;
+
+    // 功能菜单按钮
+    :deep(.right-menu-item) {
+      margin-right: 18px;
+      font-size: 24px;
+      color: #5a5e66;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     :deep(.avater-container) {
       cursor: pointer;

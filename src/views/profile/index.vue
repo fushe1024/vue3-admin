@@ -1,9 +1,12 @@
+<script setup></script>
+
 <template>
-  <div class="">个人中心</div>
+  <div>{{ $t('login.title') }}</div>
+  <el-pagination
+    :page-sizes="[100, 200, 300, 400]"
+    layout="total, sizes, prev, pager, next, jumper"
+    :total="400"
+  />
 </template>
 
-<script setup>
-import {} from 'vue'
-</script>
-
-<style lang="scss" scoped></style>
+<style scoped lang="scss"></style>

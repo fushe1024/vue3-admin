@@ -1,8 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import LangSelect from '@/components/LangSelect/index.vue'
 import { Avatar, Lock } from '@element-plus/icons-vue'
 import { validatePassword } from './rules.js'
 import { useStore } from 'vuex'
+
+// 国际化
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 // 表单引用
 const loginRef = ref(null)
@@ -13,9 +18,19 @@ const loginForm = ref({
 })
 // 登录表单验证规则
 const rules = ref({
-  username: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
+  username: [
+    {
+      required: true,
+      message: computed(() => t('login.usernameRule')),
+      trigger: 'blur'
+    }
+  ],
   password: [
-    { required: true, message: '密码不能为空', trigger: 'blur' },
+    {
+      required: true,
+      message: computed(() => t('login.passwordRule1')),
+      trigger: 'blur'
+    },
     {
       validate: validatePassword(),
       trigger: 'blur'
@@ -58,8 +73,11 @@ const handleLogin = () => {
     >
       <!-- Title -->
       <div class="title-container">
-        <div class="title">用户登录</div>
+        <div class="title">{{ $t('login.title') }}</div>
       </div>
+
+      <!-- select -->
+      <lang-select class="lang-select" effect="light" />
 
       <!-- username -->
       <el-form-item prop="username">
@@ -91,7 +109,7 @@ const handleLogin = () => {
           type="primary"
           style="width: 100%"
           @click="handleLogin"
-          >登录</el-button
+          >{{ $t('login.loginBtn') }}</el-button
         >
       </el-form-item>
     </el-form>
@@ -118,6 +136,18 @@ $cursor: #fff;
     width: 400px;
     max-height: 400px;
     overflow: hidden;
+    position: relative;
+
+    // 语言选择器
+    .lang-select {
+      position: absolute;
+      padding: 2px;
+      font-size: 24px;
+      background-color: $light_gray;
+      border-radius: 5px;
+      top: 30px;
+      right: 20px;
+    }
 
     // 标题
     .title-container {
