@@ -6,7 +6,8 @@ export const getters = {
   userInfo: (state) => state.user.userInfo,
   cssVar: () => variables,
   sidebarOpend: (state) => state.app.sidebarOpend,
-  language: (state) => state.app.language
+  language: (state) => state.app.language,
+  mainColor: (state) => state.theme.mainColor
 }
 
 export default getters

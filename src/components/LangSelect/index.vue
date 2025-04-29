@@ -29,12 +29,14 @@ const handleSetLanguage = (value) => {
 </script>
 
 <template>
-  <el-dropdown class="lang-select" trigger="click" @command="handleSetLanguage">
+  <el-dropdown trigger="click" @command="handleSetLanguage">
+    <!-- icon -->
     <div>
       <el-tooltip :content="$t('navBar.lang')" :effect="effect">
         <svg-icon icon="language" />
       </el-tooltip>
     </div>
+    <!-- menu -->
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item :disabled="language === 'zh'" command="zh"

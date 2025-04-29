@@ -2,6 +2,7 @@
 import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
+import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import { useStore } from 'vuex'
 const store = useStore()
 /**
@@ -19,9 +20,11 @@ const logout = () => {
     <!-- Breadcrumb -->
     <breadcrumb />
     <div class="right-menu">
-      <!-- 切换语言 -->
+      <!-- themeChange -->
+      <theme-select class="right-menu-item" />
+      <!-- langChange -->
       <lang-select class="right-menu-item" />
-      <!-- 头像 -->
+      <!-- avatar -->
       <el-dropdown class="avater-container" trigger="click">
         <div class="avater-wrapper">
           <el-avatar

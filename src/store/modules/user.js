@@ -1,10 +1,10 @@
 // user module
 import { login, getUserInfo } from '@/api/sys'
 import { setTimeStamp } from '@/utils/auth'
-import md5 from 'md5'
-import storage from '@/utils/storage'
 import { TOKEN } from '@/constant'
+import storage from '@/utils/storage'
 import router from '@/router'
+import md5 from 'md5'
 
 export default {
   namespaced: true,
@@ -22,38 +22,23 @@ export default {
     }
   },
   actions: {
-    /**
-     * 登录
-     */
     login({ commit }, userInfo) {
-      // 解构用户名和密码
       const { username, password } = userInfo
       return new Promise((resolve, reject) => {
-        login({
-          username: username,
-          password: md5(password)
-        })
+        login({ username, password: md5(password) })
           .then((response) => {
             commit('SET_TOKEN', response.token)
             setTimeStamp()
             router.replace('/')
             resolve()
           })
-          .catch((error) => {
-            reject(error)
-          })
+          .catch((error) => reject(error))
       })
     },
-    /**
-     * 获取用户信息
-     */
     async getInfo({ commit }) {
       const res = await getUserInfo()
       commit('SET_USER_INFO', res)
     },
-    /**
-     * 退出登录
-     */
     logout({ commit }) {
       commit('SET_TOKEN', '')
       commit('SET_USER_INFO', {})
