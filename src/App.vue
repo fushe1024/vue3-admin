@@ -6,7 +6,6 @@ import { writeNewStyle, generateNewStyle } from '@/utils/theme'
 import { useStore } from 'vuex'
 const store = useStore()
 
-// 设置主题色
 generateNewStyle(store.getters.mainColor).then((newStyle) => {
   writeNewStyle(newStyle)
 })

@@ -5,9 +5,8 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import { useStore } from 'vuex'
 const store = useStore()
-/**
- * 退出登录
- */
+
+// 退出登录
 const logout = () => {
   store.dispatch('user/logout')
 }

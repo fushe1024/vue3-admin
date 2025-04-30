@@ -1,10 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import layout from '@/layout'
-// import UserManageRouter from './modules/UserManage'
-// import RoleListRouter from './modules/RoleList'
-// import PermissionListRouter from './modules/PermissionList'
-// import ArticleRouter from './modules/Article'
-// import ArticleCreaterRouter from './modules/ArticleCreate'
 
 /**
  * 私有路由表

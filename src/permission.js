@@ -5,11 +5,8 @@ import store from './store'
 // 白名单
 const whiteList = ['/login']
 
-/**
- * 路由前置守卫
- */
+// 路由前置守卫
 router.beforeEach(async (to, from) => {
-  // 获取 token
   const token = store.getters.token
 
   if (token) {

@@ -1,10 +1,6 @@
 export default {
-  // 继承规则
   extends: ['@commitlint/config-conventional'],
-
-  // 定义规则
   rules: {
-    // type类型的值只能是以下这些
     'type-enum': [
       2,
       'always',
@@ -20,8 +16,6 @@ export default {
         'revert' // 回滚
       ]
     ],
-
-    // subject不限制大小写
     'subject-case': [0, 'never', []]
   }
 }

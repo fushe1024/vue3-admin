@@ -2,7 +2,6 @@
 import SideBar from './components/SideBar'
 import NavBar from './components/NavBar.vue'
 import AppMain from './components/AppMain.vue'
-import variables from '@/styles/variables.module.scss'
 import { useStore } from 'vuex'
 const store = useStore()
 </script>
@@ -15,7 +14,7 @@ const store = useStore()
     <!-- side-bar -->
     <side-bar
       class="sidebar-container"
-      :style="{ backgroundColor: variables.menuBg }"
+      :style="{ backgroundColor: store.getters.cssVar.menuBg }"
     ></side-bar>
     <div class="main-container">
       <div class="fixed-header">
