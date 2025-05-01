@@ -3,6 +3,7 @@ import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
+import ScreenFull from '@/components/ScreenFull/index.vue'
 import { useStore } from 'vuex'
 const store = useStore()
 
@@ -19,6 +20,8 @@ const logout = () => {
     <!-- Breadcrumb -->
     <breadcrumb />
     <div class="right-menu">
+      <!-- screenFull -->
+      <screen-full class="right-menu-item" />
       <!-- themeChange -->
       <theme-select class="right-menu-item" />
       <!-- langChange -->

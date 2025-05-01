@@ -37,7 +37,7 @@ const iconName = computed(() => `#icon-${props.icon}`)
 </script>
 
 <template>
-  <div inert>
+  <div>
     <!-- 外部图标容器 -->
     <div
       v-if="isExternal"
