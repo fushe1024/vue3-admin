@@ -1,13 +1,17 @@
 const { defineConfig } = require('@vue/cli-service')
 const path = require('path')
 
-// 路径解析函数 => 生成绝对路径
 const resolve = (dir) => {
   return path.join(__dirname, dir)
 }
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  configureWebpack: {
+    resolve: {
+      fallback: { path: require.resolve('path-browserify') }
+    }
+  },
   chainWebpack(config) {
     // 1. 清除默认的 svg 规则对 src/icons 目录的排除
     config.module.rule('svg').exclude.add(resolve('src/icons')).end()

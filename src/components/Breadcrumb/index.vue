@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { generateTitle } from '@/utils/i18n'
+import { getI18nTitle } from '@/utils/i18n'
 import { useStore } from 'vuex'
 const route = useRoute()
 
@@ -45,11 +45,11 @@ const linkHoverColer = ref(store.getters.cssVar.menuBg)
       >
         <!-- 最后一项 -->
         <span class="no-redirect" v-if="index === breadcrumbData.length - 1">
-          {{ generateTitle(item.meta.title) }}
+          {{ getI18nTitle(item.meta.title) }}
         </span>
         <!-- 其他项 -->
         <a class="redirect" v-else @click.prevent="onLinkClick(item)">
-          {{ generateTitle(item.meta.title) }}
+          {{ getI18nTitle(item.meta.title) }}
         </a>
       </el-breadcrumb-item>
     </TransitionGroup>

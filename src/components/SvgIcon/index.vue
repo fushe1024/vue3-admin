@@ -46,7 +46,7 @@ const iconName = computed(() => `#icon-${props.icon}`)
       :class="className"
     ></div>
     <!-- Svg 容器 -->
-    <svg v-else class="svg-icon" :class="className" focusable="false">
+    <svg v-else class="svg-icon" :class="className" inert>
       <use :xlink:href="iconName" />
     </svg>
   </div>

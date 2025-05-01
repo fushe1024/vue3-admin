@@ -4,6 +4,7 @@ import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
+import headerSearch from '@/components/headerSearch/index.vue'
 import { useStore } from 'vuex'
 const store = useStore()
 
@@ -20,6 +21,8 @@ const logout = () => {
     <!-- Breadcrumb -->
     <breadcrumb />
     <div class="right-menu">
+      <!-- header-search -->
+      <header-search class="right-menu-item" />
       <!-- screenFull -->
       <screen-full class="right-menu-item" />
       <!-- themeChange -->
