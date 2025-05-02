@@ -46,6 +46,15 @@ module.exports = defineConfig({
         changeOrigin: true,
         ws: true
       }
+    },
+    client: {
+      overlay: {
+        // runtimeErrors: false,  // 关闭所有错误覆盖
+        runtimeErrors: (error) => {
+          // 仅关闭特定错误
+          return !error.message.includes('ResizeObserver')
+        }
+      }
     }
   }
 })

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, nextTick, onUnmounted } from 'vue'
+import { ref, computed, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { filterRouters } from '@/utils/route'
 import { generateSearchRoutes } from './FuseData'
@@ -57,16 +57,10 @@ const onShowClick = () => {
 }
 
 // 关闭搜索框
-const onCloseClick = async () => {
-  // 1. 清空搜索内容
+const onCloseClick = () => {
   search.value = ''
   searchOptions.value = []
-
-  // 3. 等待一帧渲染周期
-  await nextTick(() => {
-    // 4. 隐藏组件
-    isShow.value = false
-  })
+  isShow.value = false
 }
 
 // 监听显示隐藏
