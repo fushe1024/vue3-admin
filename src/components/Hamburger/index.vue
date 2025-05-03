@@ -29,6 +29,7 @@ const clickBtn = () => {
   justify-content: center;
   cursor: pointer;
   transition: background-color 0.5s;
+  font-size: 20px;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
