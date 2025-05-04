@@ -5,6 +5,8 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 import headerSearch from '@/components/headerSearch/index.vue'
+import Guide from '@/components/Guide/index.vue'
+
 import { useStore } from 'vuex'
 const store = useStore()
 
@@ -19,8 +21,10 @@ const logout = () => {
     <!-- Hamburger -->
     <hamburger />
     <!-- Breadcrumb -->
-    <breadcrumb />
+    <breadcrumb id="guide-breadcrumb" />
     <div class="right-menu">
+      <!-- guide -->
+      <guide class="right-menu-item" />
       <!-- header-search -->
       <header-search class="right-menu-item" />
       <!-- screenFull -->

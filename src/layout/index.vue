@@ -14,6 +14,7 @@ const store = useStore()
   >
     <!-- side-bar -->
     <side-bar
+      id="guide-sidebar"
       class="sidebar-container"
       :style="{ backgroundColor: store.getters.cssVar.menuBg }"
     ></side-bar>
@@ -22,7 +23,7 @@ const store = useStore()
         <!-- navbar -->
         <nav-bar></nav-bar>
         <!-- tags-view -->
-        <tags-view></tags-view>
+        <tags-view id="guide-tags"></tags-view>
       </div>
       <!-- main -->
       <app-main></app-main>

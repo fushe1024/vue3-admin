@@ -33,7 +33,7 @@ const handleSetLanguage = (value) => {
     <!-- icon -->
     <div>
       <el-tooltip :content="$t('navBar.lang')" :effect="effect">
-        <svg-icon icon="language" />
+        <svg-icon id="guide-lang" icon="language" />
       </el-tooltip>
     </div>
     <!-- menu -->

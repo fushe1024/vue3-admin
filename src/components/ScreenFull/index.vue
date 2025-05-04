@@ -29,7 +29,10 @@ onUnmounted(() => {
 <template>
   <div @click="onToggle">
     <el-tooltip :content="$t('navBar.screenfull')">
-      <svg-icon :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" />
+      <svg-icon
+        id="guide-full"
+        :icon="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
+      />
     </el-tooltip>
   </div>
 </template>

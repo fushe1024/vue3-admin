@@ -16,7 +16,7 @@ const clickBtn = () => {
 
 <template>
   <div class="hamburger-container" @click="clickBtn">
-    <svg-icon :icon="iconStatus"></svg-icon>
+    <svg-icon id="guide-hamburger" :icon="iconStatus"></svg-icon>
   </div>
 </template>
 

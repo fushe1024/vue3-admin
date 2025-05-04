@@ -71,6 +71,7 @@ watch(isShow, (val) => {
     document.body.removeEventListener('click', onCloseClick)
   }
 })
+
 // 监听语言切换
 watchSwitchLang(() => {
   searchPool = computed(() => {
@@ -90,7 +91,12 @@ onUnmounted(() => {
 <template>
   <div class="header-search" :class="{ show: isShow }">
     <!-- icon -->
-    <svg-icon class="search-icon" icon="search" @click.stop="onShowClick" />
+    <svg-icon
+      id="guide-search"
+      class="search-icon"
+      icon="search"
+      @click.stop="onShowClick"
+    />
     <!-- select -->
     <el-select
       :model-value="search"
