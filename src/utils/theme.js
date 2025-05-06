@@ -106,6 +106,7 @@ const processStyleTemplate = (cssText) => {
   const colorReplacements = [
     ['#3a8ee6', 'shade-1'],
     ['#409eff', 'primary'],
+    ['#337ecc', 'primary'],
     ['#53a8ff', 'light-1'],
     ['#66b1ff', 'light-2'],
     ['#79bbff', 'light-3'],

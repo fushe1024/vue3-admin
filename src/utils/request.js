@@ -12,7 +12,10 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(
   (config) => {
-    config.headers.icode = 'helloqianduanxunlianying' // 设置请求头中的 icode
+    // 设置请求头中的 icode
+    config.headers.icode = 'helloqianduanxunlianying'
+    // 设置国际化
+    config.headers['Accept-Language'] = store.getters.language
     // 在请求头中添加 token
     const token = store.getters.token
     if (token) {

@@ -86,7 +86,7 @@ export default {
   },
   profile: {
     muted: '《vue3 改写 vue-element-admin，实现后台前端综合解决方案》项目演示',
-    introduce: '介绍（已升级 element-plus 正式版）',
+    introduce: '介绍',
     projectIntroduction: '项目介绍',
     projectFunction: '项目功能',
     feature: '功能',
