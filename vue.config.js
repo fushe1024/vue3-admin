@@ -43,8 +43,7 @@ module.exports = defineConfig({
     proxy: {
       '/api': {
         target: 'https://api.imooc-admin.lgdsunday.club/',
-        changeOrigin: true,
-        ws: true
+        changeOrigin: true
       }
     },
     client: {
