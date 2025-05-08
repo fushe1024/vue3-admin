@@ -1,12 +1,16 @@
 <script setup>
+import ExportToExcel from './components/Export2Excel.vue'
 import { ref, watch, onActivated } from 'vue'
-import { getUserManageList } from '@/api/user-manage'
+import { ElMessageBox, ElMessage } from 'element-plus'
+import { getUserManageList, deleteUser } from '@/api/user-manage'
 import { formatTime } from '@/utils/format'
 import { watchSwitchLang } from '@/utils/i18n'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+
+// 定义数据
 const userManageData = ref([])
 const total = ref(0)
-
 const reqData = ref({
   page: 1,
   size: 2
@@ -39,10 +43,34 @@ onActivated(() => {
   getUserManageData()
 })
 
-// 导入
+// 导入按钮
 const router = useRouter()
 const onImport = () => {
   router.push('/user/import')
+}
+
+// 删除逻辑
+const i18n = useI18n()
+const delUser = async (row) => {
+  ElMessageBox.confirm(
+    i18n.t('excel.dialogTitle1') + row.username + i18n.t('excel.dialogTitle2'),
+    i18n.t('excel.remove'),
+    {
+      type: 'warning'
+    }
+  )
+    .then(async () => {
+      await deleteUser(row._id)
+      getUserManageData()
+      ElMessage.success(i18n.t('excel.removeSuccess'))
+    })
+    .catch(() => {})
+}
+
+// 导出按钮
+const exportToExcelVisible = ref(false)
+const onExport = () => {
+  exportToExcelVisible.value = true
 }
 </script>
 
@@ -52,7 +80,9 @@ const onImport = () => {
       <el-button type="primary" @click="onImport">
         {{ $t('excel.importExcel') }}
       </el-button>
-      <el-button type="success">{{ $t('excel.exportExcel') }}</el-button>
+      <el-button type="success" @click="onExport">
+        {{ $t('excel.exportExcel') }}
+      </el-button>
     </el-card>
     <el-card>
       <!-- table -->
@@ -101,14 +131,14 @@ const onImport = () => {
         </el-table-column>
         <!-- 操作 -->
         <el-table-column :label="$t('excel.action')" width="300">
-          <template #default>
+          <template #default="{ row }">
             <el-button type="primary" size="small">
               {{ $t('excel.show') }}
             </el-button>
             <el-button type="info" size="small">
               {{ $t('excel.showRole') }}
             </el-button>
-            <el-button type="danger" size="small">
+            <el-button type="danger" size="small" @click="delUser(row)">
               {{ $t('excel.remove') }}
             </el-button>
           </template>
@@ -126,6 +156,9 @@ const onImport = () => {
         />
       </div>
     </el-card>
+
+    <!-- 导出弹窗 -->
+    <export-to-excel v-model:dialogVisible="exportToExcelVisible" />
   </div>
 </template>
 
