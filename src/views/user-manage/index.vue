@@ -72,6 +72,16 @@ const exportToExcelVisible = ref(false)
 const onExport = () => {
   exportToExcelVisible.value = true
 }
+
+// 查看角色
+const onShowUser = (row) => {
+  router.push({
+    name: 'userInfo',
+    params: {
+      id: row._id
+    }
+  })
+}
 </script>
 
 <template>
@@ -132,7 +142,7 @@ const onExport = () => {
         <!-- 操作 -->
         <el-table-column :label="$t('excel.action')" width="300">
           <template #default="{ row }">
-            <el-button type="primary" size="small">
+            <el-button type="primary" size="small" @click="onShowUser(row)">
               {{ $t('excel.show') }}
             </el-button>
             <el-button type="info" size="small">

@@ -26,7 +26,9 @@ watch(
   dialogVisible,
   (newVal) => {
     if (!newVal) {
-      excelName.value = defaultName
+      setTimeout(() => {
+        excelName.value = defaultName
+      }, 300)
     }
   },
   { deep: true }
@@ -54,19 +56,19 @@ const onConfirm = async () => {
   // 格式化 Excel 数据
   const data = formatJsonData(USER_RELATIONS, list)
 
-  // 导入文件下载工具进行导出
-  import('@/utils/Export2Excel').then((excel) => {
-    excel.export_json_to_excel({
-      // 表头
-      header: Object.keys(USER_RELATIONS),
-      // 数据
-      data,
-      filename: excelName.value || defaultName,
-      // 是否自动宽度
-      autoWidth: true,
-      // 导出格式
-      bookType: 'xlsx'
-    })
+  // 导入文件下载工具 => 进行导出
+  const excel = await import('@/utils/Export2Excel')
+
+  excel.export_json_to_excel({
+    // 表头
+    header: Object.keys(USER_RELATIONS),
+    // 数据
+    data,
+    filename: excelName.value || defaultName,
+    // 是否自动宽度
+    autoWidth: true,
+    // 导出格式
+    bookType: 'xlsx'
   })
 
   closed()

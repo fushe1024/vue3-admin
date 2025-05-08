@@ -13,3 +13,6 @@ export const deleteUser = (id) => service.get(`/user-manage/detele/${id}`)
 
 // 导出所有用户
 export const exportAllUser = () => service.get('/user-manage/all-list')
+
+// 获取用户详情
+export const userDetail = (id) => service.get(`/user-manage/detail/${id}`)
