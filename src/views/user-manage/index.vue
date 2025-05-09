@@ -1,5 +1,6 @@
 <script setup>
 import ExportToExcel from './components/Export2Excel.vue'
+import RoleDialog from './components/RoleDialog.vue'
 import { ref, watch, onActivated } from 'vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import { getUserManageList, deleteUser } from '@/api/user-manage'
@@ -25,9 +26,7 @@ const getUserManageData = async () => {
 getUserManageData()
 
 // 监听语言切换
-watchSwitchLang(() => {
-  getUserManageData()
-})
+watchSwitchLang(getUserManageData)
 
 // 监听分页器变化
 watch(
@@ -39,9 +38,7 @@ watch(
 )
 
 // 监听路由变化
-onActivated(() => {
-  getUserManageData()
-})
+onActivated(getUserManageData)
 
 // 导入按钮
 const router = useRouter()
@@ -49,9 +46,15 @@ const onImport = () => {
   router.push('/user/import')
 }
 
-// 删除逻辑
+// 导出按钮
+const exportToExcelVisible = ref(false)
+const onExport = () => {
+  exportToExcelVisible.value = true
+}
+
+// 删除用户
 const i18n = useI18n()
-const delUser = async (row) => {
+const delUser = (row) => {
   ElMessageBox.confirm(
     i18n.t('excel.dialogTitle1') + row.username + i18n.t('excel.dialogTitle2'),
     i18n.t('excel.remove'),
@@ -67,13 +70,7 @@ const delUser = async (row) => {
     .catch(() => {})
 }
 
-// 导出按钮
-const exportToExcelVisible = ref(false)
-const onExport = () => {
-  exportToExcelVisible.value = true
-}
-
-// 查看角色
+// 查看角色信息
 const onShowUser = (row) => {
   router.push({
     name: 'userInfo',
@@ -81,6 +78,19 @@ const onShowUser = (row) => {
       id: row._id
     }
   })
+}
+
+// 分配角色权限逻辑
+const roleDialogVisible = ref(false)
+const userId = ref('')
+// 监听 dialog 关闭 清空 userId
+watch(roleDialogVisible, (val) => {
+  if (!val) userId.value = ''
+})
+// 分配角色
+const onAssignRole = (row) => {
+  roleDialogVisible.value = true
+  userId.value = row._id
 }
 </script>
 
@@ -145,7 +155,7 @@ const onShowUser = (row) => {
             <el-button type="primary" size="small" @click="onShowUser(row)">
               {{ $t('excel.show') }}
             </el-button>
-            <el-button type="info" size="small">
+            <el-button type="info" size="small" @click="onAssignRole(row)">
               {{ $t('excel.showRole') }}
             </el-button>
             <el-button type="danger" size="small" @click="delUser(row)">
@@ -166,9 +176,14 @@ const onShowUser = (row) => {
         />
       </div>
     </el-card>
-
     <!-- 导出弹窗 -->
     <export-to-excel v-model:dialogVisible="exportToExcelVisible" />
+    <!-- 角色管理弹窗 -->
+    <role-dialog
+      v-model:roleDialogVisible="roleDialogVisible"
+      :userId="userId"
+      @updateRole="getUserManageData"
+    />
   </div>
 </template>
 

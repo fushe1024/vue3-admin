@@ -12,7 +12,7 @@ const props = defineProps({
   }
 })
 
-// 用户详情
+// 获取用户详情
 const details = ref({})
 const getUserDetail = async () => {
   const res = await userDetail(props.id)
@@ -21,11 +21,9 @@ const getUserDetail = async () => {
 getUserDetail()
 
 // 监听语言变化
-watchSwitchLang(() => {
-  getUserDetail()
-})
+watchSwitchLang(getUserDetail)
 
-// 打印逻辑
+// 打印 loading
 const printLoading = ref(false)
 // 打印对象
 const printObj = {
@@ -51,73 +49,75 @@ const printObj = {
         </el-button>
       </el-card>
     </div>
-    <el-card id="user-info-box" class="user-info-box">
-      <h2 class="title">{{ $t('userInfo.title') }}</h2>
-      <div class="header">
-        <!-- 头部渲染表格 -->
-        <el-descriptions :column="2" border>
-          <el-descriptions-item :label="$t('userInfo.name')">
-            {{ details?.username }}
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.sex')">
-            {{ details?.gender }}
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.nation')">
-            {{ details?.nationality }}
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.mobile')">
-            {{ details?.mobile }}
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.province')">
-            {{ details?.province }}
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.date')">
-            {{ formatTime(details?.openTime) }}
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.remark')" :span="2">
-            <el-tag
-              class="remark"
-              size="small"
-              v-for="(item, index) in details?.remark"
-              :key="index"
-              >{{ item }}</el-tag
-            >
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.address')" :span="2">
-            {{ details?.address }}
-          </el-descriptions-item>
-        </el-descriptions>
-        <!-- 头像渲染 -->
-        <el-image
-          class="avatar"
-          :src="details?.avatar"
-          :preview-src-list="[details?.avatar]"
-        ></el-image>
+    <el-card>
+      <div id="user-info-box" class="user-info-box">
+        <h2 class="title">{{ $t('userInfo.title') }}</h2>
+        <div class="header">
+          <!-- 头部渲染表格 -->
+          <el-descriptions :column="2" border>
+            <el-descriptions-item :label="$t('userInfo.name')">
+              {{ details?.username }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.sex')">
+              {{ details?.gender }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.nation')">
+              {{ details?.nationality }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.mobile')">
+              {{ details?.mobile }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.province')">
+              {{ details?.province }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.date')">
+              {{ formatTime(details?.openTime) }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.remark')" :span="2">
+              <el-tag
+                class="remark"
+                size="small"
+                v-for="(item, index) in details?.remark"
+                :key="index"
+                >{{ item }}</el-tag
+              >
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.address')" :span="2">
+              {{ details?.address }}
+            </el-descriptions-item>
+          </el-descriptions>
+          <!-- 头像渲染 -->
+          <el-image
+            class="avatar"
+            :src="details?.avatar"
+            :preview-src-list="[details?.avatar]"
+          ></el-image>
+        </div>
+        <div class="body">
+          <el-descriptions direction="vertical" :column="1" border>
+            <el-descriptions-item :label="$t('userInfo.experience')">
+              <ul>
+                <li v-for="(item, index) in details?.experience" :key="index">
+                  <span>
+                    {{ formatTime(item.startTime, 'YYYY/MM') }}
+                    ----
+                    {{ formatTime(item.endTime, 'YYYY/MM') }}</span
+                  >
+                  <span>{{ item.title }}</span>
+                  <span>{{ item.desc }}</span>
+                </li>
+              </ul>
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.major')">
+              {{ details?.major }}
+            </el-descriptions-item>
+            <el-descriptions-item :label="$t('userInfo.glory')">
+              {{ details?.glory }}
+            </el-descriptions-item>
+          </el-descriptions>
+        </div>
+        <div class="signature">{{ $t('userInfo.foot') }}</div>
       </div>
-      <div class="body">
-        <el-descriptions direction="vertical" :column="1" border>
-          <el-descriptions-item :label="$t('userInfo.experience')">
-            <ul>
-              <li v-for="(item, index) in details?.experience" :key="index">
-                <span>
-                  {{ formatTime(item.startTime, 'YYYY/MM') }}
-                  ----
-                  {{ formatTime(item.endTime, 'YYYY/MM') }}</span
-                >
-                <span>{{ item.title }}</span>
-                <span>{{ item.desc }}</span>
-              </li>
-            </ul>
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.major')">
-            {{ details?.major }}
-          </el-descriptions-item>
-          <el-descriptions-item :label="$t('userInfo.glory')">
-            {{ details?.glory }}
-          </el-descriptions-item>
-        </el-descriptions>
-      </div>
-      <div class="signature">{{ $t('userInfo.foot') }}</div>
     </el-card>
   </div>
 </template>
@@ -126,6 +126,7 @@ const printObj = {
 .user-info-container {
   // 顶部按钮
   .box-top {
+    margin-bottom: 20px;
     .btns {
       display: flex;
       justify-content: end;
@@ -134,8 +135,8 @@ const printObj = {
 
   // 用户信息卡片
   .user-info-box {
-    margin-top: 20px;
-    padding: 0 50px;
+    width: 1024px;
+    margin: 0 auto;
 
     .title {
       text-align: center;
