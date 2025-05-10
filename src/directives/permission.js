@@ -10,7 +10,7 @@ function checkPermission(el, binding) {
   const { value } = binding
 
   // 获取用户的权限点
-  const points = store.getters.userInfo.permission.points
+  const points = store.getters.userInfo.permission.points ?? []
 
   // 判断是否有权限
   if (value && value instanceof Array && value.length > 0) {
@@ -32,13 +32,9 @@ function checkPermission(el, binding) {
 export default {
   // 在绑定元素的父组件
   // 及他自己的所有子节点都挂载完成后调用
-  mounted(el, binding) {
-    checkPermission(el, binding)
-  },
+  mounted: checkPermission,
 
   // 在绑定元素的父组件
   // 及他自己的所有子节点都更新后调用
-  updated(el, binding) {
-    checkPermission(el, binding)
-  }
+  updated: checkPermission
 }
