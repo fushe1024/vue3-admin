@@ -34,7 +34,7 @@ const printObj = {
     printLoading.value = true
   },
   // 执行打印
-  openCallback(vue) {
+  openCallback() {
     printLoading.value = false
   }
 }

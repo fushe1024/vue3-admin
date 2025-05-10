@@ -1,10 +1,10 @@
-import { createI18n } from 'vue-i18n'
 import store from '@/store'
+import { createI18n } from 'vue-i18n'
 import zh from './locales/zh'
 import en from './locales/en'
 
 // 默认语言
-const getDefaultLocale = () => store.getters.language
+const getDefaultLocale = () => store && store.getters && store.getters.language
 
 // 创建 i18n 实例
 const i18n = createI18n({

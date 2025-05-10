@@ -3,7 +3,7 @@ import { login, getUserInfo } from '@/api/sys'
 import { setTimeStamp } from '@/utils/auth'
 import { TOKEN } from '@/constant'
 import storage from '@/utils/storage'
-import router from '@/router'
+import router, { resetRouter } from '@/router'
 import md5 from 'md5'
 
 export default {
@@ -38,8 +38,10 @@ export default {
     async getInfo({ commit }) {
       const res = await getUserInfo()
       commit('SET_USER_INFO', res)
+      return res
     },
     logout({ commit }) {
+      resetRouter()
       commit('SET_TOKEN', '')
       commit('SET_USER_INFO', {})
       storage.clear()

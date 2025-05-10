@@ -6,8 +6,6 @@ import Feature from './components/Feature.vue'
 import { getFeature } from '@/api/user'
 import { watchSwitchLang } from '@/utils/i18n'
 import { ref } from 'vue'
-import { useStore } from 'vuex'
-const store = useStore()
 
 // 激活的tab
 const activeName = ref('feature')
@@ -20,10 +18,7 @@ const getFeatureList = async () => {
 }
 getFeatureList()
 
-watchSwitchLang(() => {
-  getFeatureList()
-  store.dispatch('user/getInfo')
-})
+watchSwitchLang(getFeatureList)
 </script>
 
 <template>

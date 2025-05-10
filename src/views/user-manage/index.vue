@@ -97,7 +97,7 @@ const onAssignRole = (row) => {
 <template>
   <div class="user-manage-container">
     <el-card class="btns">
-      <el-button type="primary" @click="onImport">
+      <el-button v-permission="['importUser']" type="primary" @click="onImport">
         {{ $t('excel.importExcel') }}
       </el-button>
       <el-button type="success" @click="onExport">
@@ -155,10 +155,20 @@ const onAssignRole = (row) => {
             <el-button type="primary" size="small" @click="onShowUser(row)">
               {{ $t('excel.show') }}
             </el-button>
-            <el-button type="info" size="small" @click="onAssignRole(row)">
+            <el-button
+              v-permission="['distributeRole']"
+              type="info"
+              size="small"
+              @click="onAssignRole(row)"
+            >
               {{ $t('excel.showRole') }}
             </el-button>
-            <el-button type="danger" size="small" @click="delUser(row)">
+            <el-button
+              v-permission="['removeUser']"
+              type="danger"
+              size="small"
+              @click="delUser(row)"
+            >
               {{ $t('excel.remove') }}
             </el-button>
           </template>

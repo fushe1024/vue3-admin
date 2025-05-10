@@ -37,7 +37,6 @@ const getAllPermission = async () => {
 getAllPermission()
 
 // 获取角色已有权限
-const rolePermission = ref([])
 const getRolePermissionData = async () => {
   const res = await getRolePermission(props.userId)
   // 回显角色已有权限
@@ -92,7 +91,7 @@ const onConfirm = () => {
       :data="allPermission"
       show-checkbox
       node-key="id"
-      :checked-keys="rolePermission"
+      check-strictly
       default-expand-all
       :props="defaultProps"
     />

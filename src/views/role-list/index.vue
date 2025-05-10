@@ -34,6 +34,7 @@ const assignPermissions = (row) => {
         <el-table-column :label="$t('role.action')">
           <template #default="{ row }">
             <el-button
+              v-permission="['distributePermission']"
               type="primary"
               size="small"
               @click="assignPermissions(row)"

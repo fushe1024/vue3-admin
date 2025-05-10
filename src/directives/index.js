@@ -1,7 +1,10 @@
 import print from 'vue3-print-nb'
+import permission from './permission'
 
-// 打印全局指令
 export default (app) => {
-  // 使 v-print 在所有组件中都可用
+  // v-print 指令 (打印指令)
   app.directive('print', print)
+
+  // v-permission 指令 (权限指令)
+  app.directive('permission', permission)
 }
