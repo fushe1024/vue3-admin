@@ -7,3 +7,17 @@ import service from '@/utils/request'
  */
 export const getArticleList = (params) =>
   service.get('/article/list', { params })
+
+/**
+ * 获取文章详情
+ * @param {*} id 文章id
+ * @returns 文章详情
+ */
+export const getArticleDetail = (id) => service.get(`/article/${id}`)
+
+/**
+ * 删除文章
+ * @param {*} id 文章id
+ * @returns 结果
+ */
+export const deleteArticle = (id) => service.get(`/article/delete/${id}`)
