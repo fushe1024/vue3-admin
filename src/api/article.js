@@ -21,3 +21,10 @@ export const getArticleDetail = (id) => service.get(`/article/${id}`)
  * @returns 结果
  */
 export const deleteArticle = (id) => service.get(`/article/delete/${id}`)
+
+/**
+ * 修改文章顺序
+ * @param {*} data { initRanking: 初始顺序, finalRanking: 最终顺序  }
+ * @returns 结果
+ */
+export const updateArticleSort = (data) => service.post('/article/sort', data)

@@ -7,12 +7,16 @@ import { watchSwitchLang } from '@/utils/i18n'
 import { useStore } from 'vuex'
 const store = useStore()
 
+// 切换主题
 generateNewStyle(store.getters.mainColor).then((newStyle) => {
   writeNewStyle(newStyle)
 })
 
+// 监听语言变化
 watchSwitchLang(() => {
-  store.dispatch('user/getInfo')
+  if (store.getters.token) {
+    store.dispatch('user/getInfo')
+  }
 })
 </script>
 

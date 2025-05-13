@@ -5,7 +5,8 @@ const t = i18n.global.t
 export default () => [
   {
     label: t('article.ranking'),
-    prop: 'ranking'
+    prop: 'ranking',
+    width: '60'
   },
   {
     label: t('article.title'),
@@ -21,7 +22,8 @@ export default () => [
   },
   {
     label: t('article.desc'),
-    prop: 'desc'
+    prop: 'desc',
+    width: '300'
   },
   {
     label: t('article.action'),

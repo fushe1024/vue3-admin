@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onActivated } from 'vue'
+import { ref, watch, onActivated, onMounted } from 'vue'
 import { getArticleList, deleteArticle } from '@/api/article'
 import { watchSwitchLang } from '@/utils/i18n'
 import { relativeTime } from '@/utils/format'
@@ -7,6 +7,7 @@ import { dynamicData, checkedDynamicData, tableColumns } from './dynamic'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ElMessageBox, ElMessage } from 'element-plus'
+import { tableRef, initSortable } from './sortable/index'
 
 // 定义数据
 const articleListData = ref([])
@@ -27,6 +28,9 @@ getArticleListData()
 // 监听语言切换，监听组件激活， 重新获取文章列表
 watchSwitchLang(getArticleListData)
 onActivated(getArticleListData)
+onMounted(() => {
+  initSortable(articleListData, getArticleListData)
+})
 
 // 监听分页器变化，重新获取文章列表
 watch(
@@ -82,12 +86,13 @@ const onShowArticleDetail = (row) => {
     </el-card>
     <el-card>
       <!-- table -->
-      <el-table :data="articleListData" border>
+      <el-table ref="tableRef" :data="articleListData" border>
         <el-table-column
           v-for="(item, index) in tableColumns"
           :key="index"
           :prop="item.prop"
           :label="item.label"
+          :width="item.width ? item.width : 'auto'"
         >
           <!-- 时间处理 -->
           <template #default="{ row }" v-if="item.prop === 'publicDate'">
@@ -138,6 +143,18 @@ const onShowArticleDetail = (row) => {
       display: flex;
       align-items: center;
     }
+  }
+
+  // 表格
+  &:deep(.el-table__body-wrapper table tbody) {
+    cursor: pointer;
+  }
+
+  // 拖拽元素样式
+  &:deep(.sortable-ghost) {
+    opacity: 0.6;
+    color: #fff !important;
+    background-color: #304156 !important;
   }
 
   .pagination {
