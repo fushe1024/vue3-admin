@@ -17,6 +17,7 @@ export default {
     },
     {
       path: '/article/editor/:id',
+      name: 'articleEditor',
       component: () => import('@/views/article-create/index'),
       meta: {
         title: 'articleEditor'

@@ -1,7 +1,9 @@
 <script setup>
 import SidebarMenu from './SidebarMenu.vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 const store = useStore()
+const router = useRouter()
 </script>
 
 <template>
@@ -9,6 +11,8 @@ const store = useStore()
     <!-- logo -->
     <div class="logo-container">
       <el-avatar
+        class="logo-avatar"
+        @click="router.push('/')"
         shape="square"
         :size="44"
         :src="store.getters.userInfo.avatar"
@@ -35,6 +39,10 @@ const store = useStore()
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .logo-avatar {
+    cursor: pointer;
+  }
 
   .logo-title {
     color: #fff;

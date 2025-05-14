@@ -12,7 +12,7 @@ export const watchSwitchLang = (...callbacks) => {
   watch(
     () => store.getters.language,
     () => {
-      callbacks.forEach((cb) => cb())
+      callbacks.forEach((cb) => cb(store.getters.language))
     }
   )
 }

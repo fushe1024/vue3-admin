@@ -13,7 +13,7 @@ export const getArticleList = (params) =>
  * @param {*} id 文章id
  * @returns 文章详情
  */
-export const getArticleDetail = (id) => service.get(`/article/${id}`)
+export const articleDetail = (id) => service.get(`/article/${id}`)
 
 /**
  * 删除文章
@@ -28,3 +28,17 @@ export const deleteArticle = (id) => service.get(`/article/delete/${id}`)
  * @returns 结果
  */
 export const updateArticleSort = (data) => service.post('/article/sort', data)
+
+/**
+ * 创建文章
+ * @param {*} data 文章数据 { title: 标题, content: 内容 }
+ * @returns 结果
+ */
+export const createArticle = (data) => service.post('/article/create', data)
+
+/**
+ * 编辑文章
+ * @param {*} data 文章数据 { id: 文章id, title: 标题, content: 内容 }
+ * @returns 结果
+ */
+export const editArticle = (data) => service.post('/article/edit', data)
