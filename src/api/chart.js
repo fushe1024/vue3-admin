@@ -16,3 +16,13 @@ export const getChartCalendar = () => service.get('/chart/calendar')
  */
 export const getChartTimeAmount = (date) =>
   service.get('/chart/time/amount', { params: { date } })
+
+/**
+ * 获取饼图数据
+ */
+export const getChartPie = () => service.get('/chart/pie')
+
+/**
+ * 获取文字云图数据
+ */
+export const getChartWordCloud = () => service.get('/chart/wordCloud')

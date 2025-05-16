@@ -6,7 +6,6 @@ import PieVue from './components/pie'
 import WordCloudVue from './components/word-cloud'
 import BMapVue from './components/b-map'
 import TableSheetVue from './components/table-sheet'
-import {} from 'vue'
 </script>
 
 <template>

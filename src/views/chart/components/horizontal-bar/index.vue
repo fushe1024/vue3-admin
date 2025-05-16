@@ -55,7 +55,7 @@ const drawChart = () => {
       axisTick: {
         show: false
       },
-      data: data.value.map((item) => item.timeStr),
+      data: data.value.map((item) => item.timeStr.replace('点', 'h')),
       inverse: true
     },
     series: [
@@ -92,7 +92,7 @@ const drawChart = () => {
         type: 'bar',
         label: {
           show: true,
-          position: 'left'
+          position: 'inside'
         },
         color: '#83C0DF',
         emphasis: {
