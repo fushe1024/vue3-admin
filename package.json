@@ -24,6 +24,7 @@
     "element-plus": "^2.8.2",
     "file-saver": "^2.0.5",
     "md5": "^2.3.0",
+    "mitt": "^3.0.1",
     "path-browserify": "^1.0.1",
     "rgb-hex": "^4.1.0",
     "screenfull": "^6.0.2",

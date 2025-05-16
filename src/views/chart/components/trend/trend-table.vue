@@ -58,7 +58,10 @@ const drawChart = () => {
     yAxis: {
       type: 'value',
       min: 0,
-      max: (value) => parseInt(value.max * 1.2)
+      max: (value) => parseInt(value.max * 1.2),
+      axisLabel: {
+        formatter: (value) => `${value} ${i18n.t('chart.unit')}`
+      }
     },
     series: [
       {
