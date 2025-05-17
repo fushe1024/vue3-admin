@@ -31,6 +31,7 @@ const handleClick = (index) => {
 
 // 监听语言切换
 watchSwitchLang(() => {
+  activeItem.value = 0 // 重置激活的大区
   getRegionsData() // 重新获取大区数据
 })
 </script>
