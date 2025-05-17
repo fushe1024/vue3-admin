@@ -26,3 +26,8 @@ export const getChartPie = () => service.get('/chart/pie')
  * 获取文字云图数据
  */
 export const getChartWordCloud = () => service.get('/chart/wordCloud')
+
+/**
+ * 地图可视化数据
+ */
+export const getChartMap = () => service.get('/chart/bmap')
