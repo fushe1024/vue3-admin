@@ -120,7 +120,7 @@ watch(currentDate, (newVal, oldVal) => {
 
         p {
           height: 100%;
-          padding: 4px;
+          padding: 8px;
         }
 
         // 金额样式

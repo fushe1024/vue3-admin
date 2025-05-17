@@ -50,8 +50,18 @@ module.exports = defineConfig({
       overlay: {
         // runtimeErrors: false,  // 关闭所有错误覆盖
         runtimeErrors: (error) => {
-          // 仅关闭特定错误
-          return !error.message.includes('ResizeObserver')
+          // 错误白名单
+          const errorWhitelist = [
+            'ResizeObserver',
+            "Cannot read properties of undefined (reading 'filter')"
+          ]
+
+          // 只关闭白名单中的错误弹层
+          const isIgnored = errorWhitelist.some((keyword) =>
+            error.message.includes(keyword)
+          )
+
+          return !isIgnored
         }
       }
     }

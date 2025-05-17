@@ -72,11 +72,7 @@ watchSwitchLang(() => {
 </script>
 
 <template>
-  <el-card
-    :body-style="{
-      padding: 0
-    }"
-  >
+  <el-card :body-style="{ padding: 0 }">
     <div class="container" ref="target"></div>
   </el-card>
 </template>

@@ -31,3 +31,15 @@ export const getChartWordCloud = () => service.get('/chart/wordCloud')
  * 地图可视化数据
  */
 export const getChartMap = () => service.get('/chart/bmap')
+
+/**
+ * 获取大区数据
+ */
+export const getChartRegions = () => service.get('/chart/regions')
+
+/**
+ * 获取表格数据
+ * @param {String} regionsID 大区ID
+ */
+export const getChartTable = (regionsID) =>
+  service.get('/chart/sheets', { params: { regionsID } })
