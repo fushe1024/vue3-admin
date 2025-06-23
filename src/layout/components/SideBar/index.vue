@@ -22,7 +22,7 @@ const router = useRouter()
         class="logo-title"
         :class="{ isDisplay: !store.getters.sidebarOpend }"
       >
-        imooc-admin
+        vue3-admin
       </h1>
     </div>
     <!-- menu -->

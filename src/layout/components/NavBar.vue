@@ -47,10 +47,7 @@ const logout = () => {
             <router-link to="/">
               <el-dropdown-item>{{ $t('navBar.home') }}</el-dropdown-item>
             </router-link>
-            <a
-              href="https://github.com/fushe1024/vue3-imooc-admin"
-              target="_blank"
-            >
+            <a href="https://github.com/fushe1024/vue3-admin" target="_blank">
               <el-dropdown-item>{{ $t('navBar.address') }}</el-dropdown-item>
             </a>
             <el-dropdown-item divided @click="logout">{{
